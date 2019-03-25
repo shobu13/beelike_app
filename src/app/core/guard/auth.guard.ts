@@ -28,18 +28,17 @@ export class AuthGuard implements CanActivate {
             }).subscribe(
                 data => {
                     this.auth.registerToken(data['token']);
-                    console.log('blu');
+                    return true;
                 },
                 error1 => {
                     console.log(error1);
                 }
             );
-        }
-
-        if (token) {
+        } else if (token) {
             this.auth.refresh(token).subscribe(
                 data => {
                     this.auth.registerToken(data['token']);
+                    return true;
                 },
                 error1 => {
                     console.log(error1);
@@ -47,7 +46,6 @@ export class AuthGuard implements CanActivate {
                 }
             );
         }
-        return true;
     }
-
+// TODO FAIRE UN VRAIS TRUC PUTAIN
 }
