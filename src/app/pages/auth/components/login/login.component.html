@@ -16,6 +16,10 @@
                                 <ion-input type="password" placeholder="Mot de passe"
                                            formControlName="password"></ion-input>
                             </ion-item>
+                            <ion-item>
+                                <ion-label>Rester connecter</ion-label>
+                                <ion-toggle formControlName="stayConnected"></ion-toggle>
+                            </ion-item>
                         </ion-list>
                         <ion-button size="block" color="success" type="submit" [disabled]="!form.valid">Connexion
                         </ion-button>

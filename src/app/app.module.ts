@@ -12,6 +12,7 @@ import {BaseModule} from './ui/base/base.module';
 import {AuthService} from './core/shared/auth.service';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import {CookieService} from 'angular2-cookie/core';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -29,7 +30,8 @@ registerLocaleData(localeFr, 'fr');
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {provide: LOCALE_ID, useValue: 'fr'},
-        AuthService
+        CookieService,
+        AuthService,
     ],
     bootstrap: [AppComponent]
 })

@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
     constructor(private fb: FormBuilder, private auth: AuthService, private alertController: AlertController, private router: Router) {
         this.form = this.fb.group({
             'username': ['', Validators.required],
-            'password': ['', Validators.required]
+            'password': ['', Validators.required],
+            'stayConnected': [false],
         });
     }
 
@@ -28,6 +29,8 @@ export class LoginComponent implements OnInit {
         this.auth.login(credentials.username, credentials.password).subscribe(
             data => {
                 this.auth.registerToken(data['token']);
+                const stayConnected = this.form.controls.stayConnected.value;
+                this.auth.setStayConnected(stayConnected);
                 this.presentAlertConfirm('Connexion réussie', 'Vous êtes maintenant connecter en temps que ' + this.auth.user.username);
             },
             error1 => {

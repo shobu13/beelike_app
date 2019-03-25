@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit {
                 {
                     text: 'OK',
                     handler: () => {
-                        this.router.navigate(['/home']);
+                        this.router.navigate(['/auth']);
                     }
                 }
             ]
