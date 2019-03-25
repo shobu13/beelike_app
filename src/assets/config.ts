@@ -1,3 +1,3 @@
 export const conf = {
-    'api_url': 'http://127.0.0.1:8000'
+    'api_url': 'http://dcgapi.ezo2.eu'
 };

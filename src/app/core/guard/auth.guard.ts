@@ -46,6 +46,8 @@ export class AuthGuard implements CanActivate {
                 }
             );
         }
+        return true;
     }
+
 // TODO FAIRE UN VRAIS TRUC PUTAIN
 }
