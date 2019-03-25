@@ -5,12 +5,21 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-list>
-            <ion-item>Menu Item</ion-item>
-            <ion-item>Menu Item</ion-item>
-            <ion-item>Menu Item</ion-item>
-            <ion-item>Menu Item</ion-item>
-            <ion-item>Menu Item</ion-item>
+        <ion-list (click)="menu.close()" *ngIf="isAuth">
+            <ion-item routerLink="/" button>Accueil</ion-item>
+            <ion-item routerLink="/profil" button>Profil</ion-item>
+            <ion-item>Activités</ion-item>
+            <ion-item-divider></ion-item-divider>
+            <ion-item style="--color: red; --background: #fff5f5" button (click)="onDecoClick()">Déconnexion</ion-item>
         </ion-list>
+
+        <ion-list (click)="menu.close()" *ngIf="!isAuth">
+            <ion-item routerLink="/" button>Accueil</ion-item>
+            <ion-item>Activités</ion-item>
+            <ion-item-divider></ion-item-divider>
+            <ion-item style="--color: green; --background: rgba(184,255,193,0.39)" routerLink="/auth" button>Connexion
+            </ion-item>
+        </ion-list>
+
     </ion-content>
 </ion-menu>

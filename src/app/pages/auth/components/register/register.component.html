@@ -1,0 +1,70 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title>Enregistrement</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <ion-list>
+                            <ion-item>
+                                <ion-label>Nom d'utilisateur :</ion-label>
+                                <ion-input text-right placeholder="Nom d'utilisateur"
+                                           formControlName="username"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Mot de passe :</ion-label>
+                                <ion-input text-right type="password" placeholder="Mot de passe"
+                                           formControlName="password"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Confirmation :</ion-label>
+                                <ion-input text-right type="password"
+                                           placeholder="Confirmez votre mot de passe"
+                                           formControlName="confirmPassword"
+                                           pattern="{{form.controls.password.value}}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Nom :</ion-label>
+                                <ion-input text-right placeholder="Nom" formControlName="lastName"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Prénom :</ion-label>
+                                <ion-input text-right placeholder="Prénom" formControlName="firstName"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Adresse mail :</ion-label>
+                                <ion-input text-right type="email" placeholder="email"
+                                           formControlName="email"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Ville :</ion-label>
+                                <ion-input text-right placeholder="Ville" formControlName="city"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Code postal :</ion-label>
+                                <ion-input text-right placeholder="Code postal"
+                                           formControlName="postalCode"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Téléphone :</ion-label>
+                                <ion-input text-right type="tel" placeholder="Téléphone"
+                                           formControlName="phone"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>Date de naissance :</ion-label>
+                                <ion-datetime text-right display-format="DD/MMMM/YYYY"
+                                              placeholder="13/08/1999" [monthNames]="monthNames"
+                                              formControlName="birth"></ion-datetime>
+                            </ion-item>
+                        </ion-list>
+                        <ion-button type="submit" size="block" color="success" [disabled]="!form.valid">Connexion
+                        </ion-button>
+                    </form>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
