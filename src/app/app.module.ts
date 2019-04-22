@@ -13,6 +13,8 @@ import {AuthService} from './core/shared/auth.service';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {CookieService} from 'angular2-cookie/core';
+import {IonicStorageModule} from '@ionic/storage';
+import {CoreModule} from './core/core.module';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -22,8 +24,10 @@ registerLocaleData(localeFr, 'fr');
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
         AppRoutingModule,
         BaseModule,
+        CoreModule,
     ],
     providers: [
         StatusBar,

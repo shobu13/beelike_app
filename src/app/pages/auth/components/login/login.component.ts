@@ -28,12 +28,15 @@ export class LoginComponent implements OnInit {
         const credentials = this.form.getRawValue();
         this.auth.login(credentials.username, credentials.password).subscribe(
             data => {
-                this.auth.registerToken(data['token']);
-                const stayConnected = this.form.controls.stayConnected.value;
-                this.auth.setStayConnected(stayConnected);
-                this.presentAlertConfirm('Connexion réussie', 'Vous êtes maintenant connecter en temps que ' + this.auth.user.username);
+                this.auth.registerToken(data['token']).then(() => {
+                    console.log('token created');
+                    this.presentAlertConfirm('Connexion réussie', 'Vous êtes maintenant connecter en temps que ' + this.auth.user.username);
+                });
+                // const stayConnected = this.form.controls.stayConnected.value;
+                // this.auth.setStayConnected(stayConnected);
             },
             error1 => {
+                console.log(error1);
                 const errs = [];
                 for (const error in error1['error']) {
                     if (error1['error'].hasOwnProperty(error)) {

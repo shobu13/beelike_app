@@ -4,7 +4,7 @@ import {conf} from '../../../assets/config';
 import {Subject} from 'rxjs';
 import {DatePipe} from '@angular/common';
 import {User} from '../models/user.model';
-import {CookieService} from 'angular2-cookie/core';
+import {Storage} from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -41,7 +41,7 @@ export class AuthService {
         this._user = value;
     }
 
-    constructor(private http: HttpClient, private cookieService: CookieService) {
+    constructor(private http: HttpClient, private storage: Storage) {
     }
 
     login(user: string, password: string) {
@@ -59,7 +59,7 @@ export class AuthService {
         this._token_expires = undefined;
         this._isAuth = false;
         this._isAuthSubject.next(this._isAuth);
-        this.cookieService.removeAll();
+        return this.storage.clear();
     }
 
     refresh(token) {
@@ -83,37 +83,15 @@ export class AuthService {
         return this.http.post(conf.api_url + '/user/', data);
     }
 
-    setStayConnected(value: boolean) {
-        if (value) {
-            const config = {
-                headers: {
-                    'Authorization': `JWT ${this._token}`,
-                }
-            };
-            this.http.get(conf.api_url + '/user/' + this._user.id + '/retrieve-pass/', config).subscribe(
-                data => {
-                    this.cookieService.put('stayConnectedToken', data['password']);
-                    this.cookieService.put('stayConnectedUser', this._user.username);
-                }
-            );
-        } else {
-            this.cookieService.remove('stayConnectedToken');
-        }
-    }
-
-    getStayConnectedToken(): string {
-        return this.cookieService.get('stayConnectedToken');
-    }
-
     registerToken(token: string) {
         this._isAuth = true;
         this._token = token;
+        this.updateData();
         this.isAuthSubject.next(this._isAuth);
-        this.updateData(token);
-        this.cookieService.put('token', token);
+        return this.storage.set('token', token);
     }
 
-    private updateData(token) {
+    private updateData() {
         const token_parts = this.token.split(/\./);
         const token_decoded = JSON.parse(window.atob(token_parts[1]));
         this._token_expires = new Date(token_decoded.exp * 1000);

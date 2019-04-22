@@ -21,18 +21,18 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
         this.auth.isAuthSubject.subscribe(
             value => {
-                this.isAuth = value;
                 if (value) {
                     this.user = this.auth.user;
                 }
+                this.isAuth = value;
             }
         );
     }
 
     onDecoClick() {
         this.menu.close();
-        this.auth.logout();
-        this.presentAlertConfirm('Déconnexion', 'Déconnexion effectuée avec succès.');
+        this.auth.logout().then(() => this.presentAlertConfirm('Déconnexion', 'Déconnexion effectuée avec succès.'));
+
     }
 
     async presentAlertConfirm(title: string, msg: string) {
